@@ -1,0 +1,197 @@
+pipeline {
+
+
+
+    agent {
+
+        node {
+
+            label 'master'
+
+        }
+
+    }
+
+
+
+    options {
+
+        buildDiscarder logRotator( 
+
+                    daysToKeepStr: '15', 
+
+                    numToKeepStr: '10'
+
+            )
+
+    }
+
+
+
+    environment {
+
+        APP_NAME = "STUDENT_APP"
+
+        APP_ENV  = "DEV"
+
+    }
+
+
+
+    stages {
+
+        
+
+        stage('ST1-5066357P') {
+
+            steps {
+
+                cleanWs()
+
+                sh """
+
+                echo "Cleaned Up Workspace for ${APP_NAME}"
+
+                """
+
+            }
+
+        }
+
+
+
+        stage('ST2-5066357P') {
+
+            steps {
+
+                checkout([
+
+                    $class: 'GitSCM', 
+
+                    branches: [[name: '*/main']], 
+
+                    userRemoteConfigs: [[url: 'https://github.com/nchinling/rp-dv1c03-repo']]
+
+                ])
+
+            }
+
+        }
+
+
+
+
+
+        stage('ST3-Parallel-5066357P'){
+
+
+
+            parallel {
+
+                
+
+                stage('Printing All Global Variables') {
+
+                    steps {
+
+                        sh """
+
+                        env
+
+                        """
+
+                    }
+
+                }
+
+
+
+                stage('Execute Shell') {
+
+                    steps {
+
+                        sh 'echo "Hello Student. Thanks for keeping up!"'
+
+                   
+
+                    }
+
+                }
+
+
+
+                stage('Print ENV variable') {
+
+                    steps {
+
+                        sh "echo ${APP_ENV}"
+
+                   
+
+                    }
+
+                }
+
+                
+
+            }
+
+        }
+
+
+
+
+
+        
+
+        stage('ST4-5066357P') {
+
+            steps {
+
+                 sh 'echo "ST4-<your polite id> : Security reports are checked"'
+
+            }
+
+        }
+
+
+
+
+
+        
+
+        stage('ST5-5066357P') {
+
+            steps {
+
+                  sh 'echo "ST5-<your polite id> : Security reports are checked"'
+
+            }
+
+        }
+
+
+
+        
+
+        stage('ST6-5066357P') {
+
+            steps {
+
+                  sh 'echo "ST6-<your polite id> : Security reports are checked"'
+
+            }
+
+        }
+
+
+
+
+
+
+
+    }   
+
+    
+
+}
