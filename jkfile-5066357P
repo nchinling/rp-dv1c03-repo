@@ -89,7 +89,7 @@ pipeline {
 
             '''
 
-	   }
+	   
 
             parallel {
 
@@ -98,6 +98,8 @@ pipeline {
                     steps {
 
                         sh '''
+                        echo "ST3 Parallel-5066357P-: Security Testing"
+
 
                         echo "ST3A-5066357P: X-Site Scripting (XSS) Test Completed and Report Generated"
 
@@ -124,6 +126,7 @@ pipeline {
                 }
 
             }
+	}
 
         }
 
