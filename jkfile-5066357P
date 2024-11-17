@@ -64,13 +64,13 @@ pipeline {
 
                 # Stop and remove any existing container with the same name
 
-                docker rm -f svr-5066357P || true
+                docker rm -f svr-5066357p || true
 
 
 
                 # Create and run a container from the existing image
 
-                docker run --name svr-5066357P -d --restart=always -p 32900:80 img-base-5066357P:latest
+                docker run --name svr-5066357P -d --restart=always -p 32900:80 img-base-5066357p:latest
 
                 '''
 
