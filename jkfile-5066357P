@@ -70,58 +70,7 @@ pipeline {
 
                 # Create and run a container from the existing image
 
-               docker run --name svr-5066357p -d -p 32900:80 img-base-5066357p:latest
-
-	 stage('ST3-Parallel-5066357P') {
-
-            parallel {
-
-                stage('ST3-Parallel-5066357P description') {
-
-                    steps {
-
-                        sh '''
-
-                        echo "ST3 Parallel-5066357P-: Security Testing"
-
-                        '''
-
-                    }
-
-                }
-
-                stage('ST3A-5066357P') {
-
-                    steps {
-
-                        sh '''
-
-                        echo "ST3A-5066357P: X-Site Scripting (XSS) Test Completed and Report Generated"
-
-                        '''
-
-                    }
-
-                }
-
-
-
-                stage('ST3B-5066357P') {
-
-                    steps {
-
-                        sh '''
-
-                        echo "ST3B-50666357P: SQL injection (SQLI) Test Completed and Report Generated"
-
-                        '''
-
-                    }
-
-                }
-
-            }
-
+                docker run --name svr-5066357p -d -p 32900:80 img-base-5066357p:latest
 
                 '''
 
