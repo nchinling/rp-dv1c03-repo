@@ -81,25 +81,28 @@ pipeline {
 
 
         stage('ST3-Parallel-5066357P') {
-	   steps{
-
-             sh '''
-
-                echo "ST3 Parallel-5066357P-: Security Testing"
-
-            '''
-
-	   
 
             parallel {
+
+                stage('ST3-Parallel-5066357P description') {
+
+                    steps {
+
+                        sh '''
+
+                        echo "ST3 Parallel-5066357P-: Security Testing"
+
+                        '''
+
+                    }
+
+                }
 
                 stage('ST3A-5066357P') {
 
                     steps {
 
                         sh '''
-                        echo "ST3 Parallel-5066357P-: Security Testing"
-
 
                         echo "ST3A-5066357P: X-Site Scripting (XSS) Test Completed and Report Generated"
 
@@ -126,7 +129,6 @@ pipeline {
                 }
 
             }
-	}
 
         }
 
