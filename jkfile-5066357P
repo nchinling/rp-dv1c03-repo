@@ -70,7 +70,11 @@ pipeline {
 
                 # Create and run a container from the existing image
 
-                 docker run --name svr-5066357P -d -p 32900:80 img-base-5066357P:latest apache2ctl -D FOREGROUND
+                # docker run --name svr-5066357P -d -p 32900:80 img-base-5066357p:latest
+
+
+
+                docker run --name svr-5066357P -d -p 32900:80 img-base-5066357p:latest apache2ctl -D FOREGROUND
 
 
 
