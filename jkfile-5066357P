@@ -1,7 +1,5 @@
 pipeline {
 
-
-
     agent {
 
         node {
@@ -16,9 +14,9 @@ pipeline {
 
     options {
 
-        buildDiscarder logRotator( 
+        buildDiscarder logRotator(
 
-                    daysToKeepStr: '15', 
+                    daysToKeepStr: '15',
 
                     numToKeepStr: '10'
 
@@ -30,9 +28,9 @@ pipeline {
 
     environment {
 
-        APP_NAME = "STUDENT_APP"
+        APP_NAME = 'SOLAR_UTIL_APP'
 
-        APP_ENV  = "DEV"
+        APP_ENV  = 'DEV'
 
     }
 
@@ -40,19 +38,15 @@ pipeline {
 
     stages {
 
-        
-
         stage('ST1-5066357P') {
 
             steps {
 
-                cleanWs()
+                sh '''
 
-                sh """
+                echo "ST1-5066375P: Setup Release Environment Completed"
 
-                echo "Cleaned Up Workspace for ${APP_NAME}"
-
-                """
+                '''
 
             }
 
@@ -64,15 +58,21 @@ pipeline {
 
             steps {
 
-                checkout([
+                sh '''
 
-                    $class: 'GitSCM', 
 
-                    branches: [[name: '*/main']], 
 
-                    userRemoteConfigs: [[url: 'https://github.com/nchinling/rp-dv1c03-repo']]
+                # Stop and remove any existing container with the same name
 
-                ])
+                docker rm -f svr-5066357P || true
+
+
+
+                # Create and run a container from the existing image
+
+                docker run --name svr-5066357P -d --restart=always -p 32900:80 img-base-5066357P:latest
+
+                '''
 
             }
 
@@ -80,25 +80,25 @@ pipeline {
 
 
 
+        stage('ST3-Parallel-5066357P') {
 
+            sh '''
 
-        stage('ST3-Parallel-5066357P'){
+                echo "ST3 Parallel-5066357P-: Security Testing"
 
-
+            '''
 
             parallel {
 
-                
-
-                stage('Printing All Global Variables') {
+                stage('ST3A-5066357P') {
 
                     steps {
 
-                        sh """
+                        sh '''
 
-                        env
+                        echo "ST3A-5066357P: X-Site Scripting (XSS) Test Completed and Report Generated"
 
-                        """
+                        '''
 
                     }
 
@@ -106,92 +106,62 @@ pipeline {
 
 
 
-                stage('Execute Shell') {
+                stage('ST3B-5066357P') {
 
                     steps {
 
-                        sh 'echo "Hello Student. Thanks for keeping up!"'
+                        sh '''
 
-                   
+                        echo "ST3B-50666357P: SQL injection (SQLI) Test Completed and Report Generated"
+
+                        '''
 
                     }
 
                 }
-
-
-
-                stage('Print ENV variable') {
-
-                    steps {
-
-                        sh "echo ${APP_ENV}"
-
-                   
-
-                    }
-
-                }
-
-                
 
             }
 
         }
 
 
-
-
-
-        
 
         stage('ST4-5066357P') {
 
             steps {
 
-                 sh 'echo "ST4-<your polite id> : Security reports are checked"'
+                sh 'echo "ST4-5066357P : Security reports are checked"'
 
             }
 
         }
 
 
-
-
-
-        
 
         stage('ST5-5066357P') {
 
             steps {
 
-                  sh 'echo "ST5-<your polite id> : Security reports are checked"'
+                sh 'echo "ST5-<your polite id> : Security reports are checked"'
 
             }
 
         }
 
 
-
-        
 
         stage('ST6-5066357P') {
 
             steps {
 
-                  sh 'echo "ST6-<your polite id> : Security reports are checked"'
+                sh 'echo "ST6-<your polite id> : Security reports are checked"'
 
             }
 
         }
 
-
-
-
-
-
-
-    }   
-
-    
+    }
 
 }
+
+
