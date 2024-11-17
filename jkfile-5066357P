@@ -81,12 +81,15 @@ pipeline {
 
 
         stage('ST3-Parallel-5066357P') {
+	   steps{
 
-            sh '''
+             sh '''
 
                 echo "ST3 Parallel-5066357P-: Security Testing"
 
             '''
+
+	   }
 
             parallel {
 
