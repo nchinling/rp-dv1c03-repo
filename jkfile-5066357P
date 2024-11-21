@@ -79,7 +79,7 @@ pipeline {
         stage('ST5-5066357P') {
             steps {
                 //input('Hello 5066357P, permission to proceed to next phase?')
-                input(message: 'Hello 5066357P, permission to proceed to next phase?', ok: 'Proceed')
+                input(message: 'Hello 5066357P, permission to proceed to next phase?')
                 echo 'ST5-5066357P : Approve to proceed to next phase'
             }
         }
