@@ -45,16 +45,10 @@ pipeline {
 
         stage('ST3-Parallel-5066357P') {
             parallel {
-                stage('ST3-Parallel-5066357P description') {
-                    steps {
-                        sh '''
-                        echo "ST3 Parallel-5066357P-: Security Testing"
-                        '''
-                    }
-                }
                 stage('ST3A-5066357P') {
                     steps {
                         sh '''
+                        echo "ST3 Parallel-5066357P-: Security Testing"
                         echo "ST3A-5066357P: X-Site Scripting (XSS) Test Completed and Report Generated"
                         '''
                     }
@@ -78,7 +72,6 @@ pipeline {
 
         stage('ST5-5066357P') {
             steps {
-                //input('Hello 5066357P, permission to proceed to next phase?')
                 input(message: 'Hello 5066357P, permission to proceed to next phase?')
                 echo 'ST5-5066357P : Approve to proceed to next phase'
             }
@@ -91,5 +84,4 @@ pipeline {
         }
     }
 }
-
 
