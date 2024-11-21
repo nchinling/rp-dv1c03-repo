@@ -1,183 +1,95 @@
 pipeline {
-
     agent {
-
         node {
-
             label 'master'
-
         }
-
     }
-
-
 
     options {
-
         buildDiscarder logRotator(
-
                     daysToKeepStr: '15',
-
                     numToKeepStr: '10'
-
             )
-
     }
-
-
 
     environment {
-
         APP_NAME = 'SOLAR_UTIL_APP'
-
         APP_ENV  = 'DEV'
-
     }
 
-
-
     stages {
-
         stage('ST1-5066357P') {
-
             steps {
-
                 sh '''
-
                 echo "ST1-5066375P: Setup Release Environment Completed"
-
                 '''
-
             }
-
         }
 
-
-
         stage('ST2-5066357P') {
-
             steps {
-
                 sh '''
 
-
-
                 # Stop and remove any existing container with the same name
-
                 docker rm -f svr-5066357P || true
 
-
-
                 # Create and run a container from the existing image
-
                 # docker run --name svr-5066357P -d -p 32900:80 img-base-5066357p:latest
-
-
 
                 docker run --name svr-5066357P -d -p 32900:80 img-base-5066357p:latest apache2ctl -D FOREGROUND
 
-
-
                 echo 'ST2-5066357P: Server Setup Completed'
-
                 '''
-
             }
-
         }
-
-
 
         stage('ST3-Parallel-5066357P') {
-
             parallel {
-
                 stage('ST3-Parallel-5066357P description') {
-
                     steps {
-
                         sh '''
-
                         echo "ST3 Parallel-5066357P-: Security Testing"
-
                         '''
-
                     }
-
                 }
-
                 stage('ST3A-5066357P') {
-
                     steps {
-
                         sh '''
-
                         echo "ST3A-5066357P: X-Site Scripting (XSS) Test Completed and Report Generated"
-
                         '''
-
                     }
-
                 }
-
-
 
                 stage('ST3B-5066357P') {
-
                     steps {
-
                         sh '''
-
                         echo "ST3B-50666357P: SQL injection (SQLI) Test Completed and Report Generated"
-
                         '''
-
                     }
-
                 }
-
             }
-
         }
-
-
 
         stage('ST4-5066357P') {
-
             steps {
-
                 sh 'echo "ST4-5066357P : Security reports are checked"'
-
             }
-
         }
-
-
 
         stage('ST5-5066357P') {
-
             steps {
-
-                sh 'echo "ST5-<your polite id> : Security reports are checked"'
-
+                //input('Hello 5066357P, permission to proceed to next phase?')
+                input(message: 'Hello 5066357P, permission to proceed to next phase?', ok: 'Proceed')
+                echo 'ST5-5066357P : Approve to proceed to next phase'
             }
-
         }
-
-
 
         stage('ST6-5066357P') {
-
             steps {
-
-                sh 'echo "ST6-<your polite id> : Security reports are checked"'
-
+                sh 'echo "ST6-5066357P : Ready for next phase"'
             }
-
         }
-
     }
-
 }
 
 
