@@ -34,8 +34,6 @@ pipeline {
                 docker rm -f svr-5066357P || true
 
                 # Create and run a container from the existing image
-                # docker run --name svr-5066357P -d -p 32900:80 img-base-5066357p:latest
-
                 docker run --name svr-5066357P -d -p 32900:80 img-base-5066357p:latest apache2ctl -D FOREGROUND
 
                 echo 'ST2-5066357P: Server Setup Completed'
@@ -48,7 +46,6 @@ pipeline {
                 stage('ST3A-5066357P') {
                     steps {
                         sh '''
-                        echo "ST3 Parallel-5066357P-: Security Testing"
                         echo "ST3A-5066357P: X-Site Scripting (XSS) Test Completed and Report Generated"
                         '''
                     }
@@ -84,4 +81,5 @@ pipeline {
         }
     }
 }
+
 
